@@ -1,0 +1,261 @@
+/* Project Infinity — общий стиль: комикс, как в EmploRage */
+:root {
+  --red: #e8321e;
+  --red-deep: #a8170c;
+  --orange: #ff7a1a;
+  --yellow: #ffd21f;
+  --ink: #141414;
+  --paper: #fff6e3;
+  --paper-2: #ffe9bd;
+  --muted: #5b4a3a;
+  --blue: #2f8cff;
+  --radius: 18px;
+  --outline: 3px solid var(--ink);
+  --shadow: 6px 6px 0 var(--ink);
+  --head: "Bangers", "Rubik", Impact, system-ui, sans-serif;
+  /* у Bangers узкий пробел — с кириллицей из Rubik слова слипаются */
+  --head-gap: 0.22em;
+  --body: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+/* двуязычие: <span lang="ru">…</span><span lang="en">…</span>, html[lang] выбирает */
+html[lang="ru"] [lang="en"]:not(html),
+html[lang="en"] [lang="ru"]:not(html) { display: none !important; }
+
+.wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+/* ---------------------------------------------------------------- шапка */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 3px solid var(--yellow);
+}
+
+.top .wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 60px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font: 26px/1 var(--head);
+  letter-spacing: 1px;
+}
+
+.brand b { color: var(--yellow); font-weight: 400; }
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  border: 2px solid var(--yellow);
+  background: var(--red);
+  display: grid;
+  place-items: center;
+  font: 22px/1 var(--head);
+  color: var(--yellow);
+}
+
+.nav { margin-left: auto; display: flex; align-items: center; gap: 18px; }
+
+.nav a { text-decoration: none; font-weight: 600; font-size: 15px; opacity: 0.85; }
+.nav a:hover { opacity: 1; color: var(--yellow); }
+
+.lang {
+  display: inline-flex;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lang button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: 700 13px/1 var(--body);
+  padding: 7px 11px;
+  cursor: pointer;
+}
+
+html[lang="ru"] .lang [data-set="ru"],
+html[lang="en"] .lang [data-set="en"] { background: var(--yellow); color: var(--ink); }
+
+/* ---------------------------------------------------------------- фон-комикс */
+.rays {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 210, 31, 0.55), transparent 55%),
+    repeating-conic-gradient(from 0deg at 50% 45%, var(--red) 0deg 9deg, #f2491f 9deg 18deg);
+  color: #fff;
+}
+
+.rays::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(rgba(20, 20, 20, 0.22) 1.6px, transparent 1.8px) 0 0 / 14px 14px;
+  mask-image: linear-gradient(to bottom, transparent, #000 75%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 75%);
+}
+
+.halftone {
+  background:
+    radial-gradient(rgba(232, 50, 30, 0.13) 1.6px, transparent 1.8px) 0 0 / 16px 16px,
+    var(--paper);
+}
+
+/* ---------------------------------------------------------------- кнопки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 12px 16px;
+  border: var(--outline);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.12s, box-shadow 0.12s;
+  line-height: 1.1;
+}
+
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+
+.btn svg { width: 28px; height: 28px; flex: none; }
+.btn small { display: block; font-size: 11px; opacity: 0.8; letter-spacing: 0.3px; }
+.btn strong { display: block; font-size: 18px; }
+
+.btn.yellow { background: var(--yellow); color: var(--ink); }
+
+.btn.soon { background: #3a3a3a; cursor: default; }
+.btn.soon:hover { transform: none; box-shadow: 4px 4px 0 var(--ink); }
+
+.stores { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ---------------------------------------------------------------- заголовки */
+.title {
+  font: clamp(38px, 6vw, 64px)/0.95 var(--head);
+  letter-spacing: 1px;
+  margin: 0 0 18px;
+  font-style: italic;
+  word-spacing: var(--head-gap);
+}
+
+.title.stroke {
+  color: var(--yellow);
+  -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--ink);
+}
+
+.kicker {
+  display: inline-block;
+  font: 700 13px/1 var(--body);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: var(--ink);
+  color: var(--yellow);
+  padding: 7px 12px;
+  border-radius: 6px;
+  transform: rotate(-2deg);
+  margin-bottom: 14px;
+}
+
+section { padding: clamp(56px, 9vw, 96px) 0; }
+
+.lead { font-size: clamp(18px, 2.2vw, 21px); max-width: 720px; }
+
+/* ---------------------------------------------------------------- карточки */
+.panel {
+  background: #fff;
+  border: var(--outline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
+.card { padding: 22px 22px 24px; }
+
+.card h3 {
+  word-spacing: var(--head-gap);
+  font: 30px/1 var(--head);
+  letter-spacing: 0.5px;
+  margin: 12px 0 8px;
+  font-style: italic;
+}
+
+.card p { margin: 0; color: var(--muted); font-size: 16px; }
+
+.badge {
+  width: 56px;
+  height: 56px;
+  border: var(--outline);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  background: var(--yellow);
+  transform: rotate(-4deg);
+}
+
+.card:nth-child(2n) .badge { background: var(--orange); transform: rotate(3deg); }
+.card:nth-child(3n) .badge { background: #8fd3ff; }
+
+/* ---------------------------------------------------------------- подвал */
+.foot {
+  background: var(--ink);
+  color: #ddd;
+  padding: 40px 0 48px;
+  font-size: 15px;
+}
+
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; }
+.foot a { color: #fff; }
+.foot h4 { font: 22px/1 var(--head); color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.5px; }
+.foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.foot .copy { width: 100%; opacity: 0.6; font-size: 13px; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav a.hide-sm { display: none; }
+  .brand { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

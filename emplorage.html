@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="ru" data-title-ru="EmploRage: Офисная ярость — разнеси офис, уволь всех" data-title-en="EmploRage: Office Rage — smash the office, fire everyone">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EmploRage: Офисная ярость — разнеси офис, уволь всех</title>
+  <meta name="description" content="Офисный экшен для телефона: копи ярость, срывайся и увольняй коллег клавиатурами, фикусами и автоматом с едой. Бесплатно в Google Play и App Store.">
+  <meta name="theme-color" content="#141414">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Project Infinity">
+  <meta property="og:title" content="EmploRage: Офисная ярость">
+  <meta property="og:description" content="Достали дедлайны и созвоны? Разнеси офис и уволь всех коллег сам! Бесплатно на Android и iPhone.">
+  <meta property="og:url" content="https://proj-infinity.github.io/emplorage.html">
+  <meta property="og:image" content="https://proj-infinity.github.io/assets/emplorage/og_ru.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="apple-itunes-app" content="app-id=6823169235">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Rubik:ital,wght@0,400;0,600;0,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+
+  <style>
+    /* ---------------------------------------------------------------- первый экран */
+    .hero { padding: clamp(40px, 7vw, 84px) 0 clamp(70px, 10vw, 120px); overflow: hidden; }
+
+    .hero .wrap > *, .story .wrap > *, .meltdown .wrap > * { min-width: 0; }
+
+    .hero .wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 56px);
+      align-items: center;
+    }
+
+    .logo {
+      position: relative;
+      display: inline-block;
+      margin: 0 0 6px -8px;
+      padding: 26px 46px 30px;
+      transform: rotate(-4deg);
+    }
+
+    .logo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--yellow);
+      border: 4px solid var(--ink);
+      clip-path: polygon(0% 22%, 9% 14%, 6% 0%, 22% 9%, 34% 0%, 44% 10%, 58% 1%, 66% 12%, 82% 3%, 86% 17%, 100% 14%, 94% 34%, 100% 52%, 92% 64%, 99% 84%, 82% 82%, 76% 100%, 62% 88%, 48% 99%, 38% 87%, 22% 98%, 18% 82%, 2% 88%, 7% 68%, 0% 52%, 6% 38%);
+      filter: drop-shadow(5px 5px 0 var(--ink));
+    }
+
+    .logo h1 {
+      position: relative;
+      margin: 0;
+      font: clamp(54px, 9vw, 104px)/0.9 var(--head);
+      letter-spacing: 2px;
+      color: var(--red);
+      -webkit-text-stroke: 3px var(--ink);
+      paint-order: stroke fill;
+      text-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .logo span.sub {
+      position: relative;
+      display: block;
+      margin-top: 6px;
+      font: italic 800 clamp(18px, 2.4vw, 26px)/1 var(--body);
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .hero p.tag {
+      font: italic 900 clamp(24px, 3.4vw, 36px)/1.1 var(--body);
+      margin: 26px 0 12px;
+      text-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .hero p.lead { margin: 0 0 28px; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35); }
+
+    .hero .free { margin-top: 14px; font-size: 14px; opacity: 0.95; }
+
+    .shot-stack { position: relative; }
+
+    .shot-stack figure {
+      margin: 0;
+      border: 4px solid var(--ink);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 10px 10px 0 var(--ink);
+      background: var(--ink);
+    }
+
+    .shot-stack .back {
+      position: absolute;
+      width: 78%;
+      right: -6%;
+      top: -12%;
+      transform: rotate(7deg);
+      opacity: 0.95;
+    }
+
+    .shot-stack .front { position: relative; transform: rotate(-3deg); }
+
+    .pow {
+      position: absolute;
+      left: -26px;
+      bottom: -30px;
+      z-index: 2;
+      font: 40px/1 var(--head);
+      color: var(--ink);
+      background: var(--yellow);
+      border: 3px solid var(--ink);
+      padding: 14px 20px 10px;
+      border-radius: 14px;
+      transform: rotate(-10deg);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    /* ---------------------------------------------------------------- история */
+    .story .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; }
+
+    .bubbles { display: grid; gap: 16px; }
+
+    .bubble {
+      position: relative;
+      background: #fff;
+      border: var(--outline);
+      border-radius: 22px;
+      padding: 12px 18px 14px;
+      box-shadow: 4px 4px 0 var(--ink);
+      font: italic 800 20px/1.2 var(--body);
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .bubble small { display: block; font: 700 12px/1 var(--body); letter-spacing: 1px; color: var(--red); margin-bottom: 4px; font-style: normal; }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      bottom: -14px;
+      width: 22px;
+      height: 16px;
+      background: #fff;
+      border: var(--outline);
+      border-top: 0;
+      border-right: 0;
+      transform: skewX(-35deg);
+    }
+
+    .bubble:nth-child(1) { background: var(--yellow); transform: rotate(-2deg); }
+    .bubble:nth-child(1)::after { background: var(--yellow); }
+    .bubble:nth-child(2) { margin-left: auto; transform: rotate(2deg); }
+    .bubble:nth-child(3) { background: #ffb36b; transform: rotate(-1deg); margin-left: 8%; }
+    .bubble:nth-child(3)::after { background: #ffb36b; }
+    .bubble:nth-child(4) { margin-left: auto; transform: rotate(1.5deg); }
+
+    .counter {
+      margin-top: 26px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 12px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 14px;
+      padding: 14px 18px;
+      transform: rotate(-1.5deg);
+    }
+
+    .counter b { font: clamp(32px, 9vw, 44px)/1 var(--head); color: var(--yellow); letter-spacing: 1px; white-space: nowrap; }
+
+    /* ---------------------------------------------------------------- срыв */
+    .meltdown { background: var(--ink); color: #fff; overflow: hidden; }
+
+    .meltdown .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 44px; align-items: center; }
+
+    .meltdown figure { margin: 0; border: 4px solid var(--yellow); border-radius: 20px; overflow: hidden; transform: rotate(2deg); box-shadow: -10px 10px 0 var(--red); }
+
+    .meltdown ul { padding: 0; margin: 22px 0 0; list-style: none; display: grid; gap: 12px; }
+
+    .meltdown li { display: flex; gap: 12px; align-items: flex-start; }
+
+    .meltdown li::before { content: "✦"; color: var(--yellow); font-size: 20px; line-height: 1.4; }
+
+    .rage-bar {
+      margin-top: 26px;
+      height: 26px;
+      border: 3px solid #fff;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #2a2a2a;
+    }
+
+    .rage-bar i {
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--orange), var(--red));
+      transform-origin: left;
+      animation: rage 3.2s ease-in-out infinite;
+    }
+
+    @keyframes rage {
+      0% { transform: scaleX(0.08); }
+      70% { transform: scaleX(1); }
+      85% { transform: scaleX(1); filter: brightness(1.5); }
+      100% { transform: scaleX(0.08); }
+    }
+
+    /* ---------------------------------------------------------------- галерея */
+    .gallery {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: min(78%, 560px);
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 8px 16px 26px;
+      margin-inline: -16px;
+      scrollbar-width: thin;
+    }
+
+    .gallery button {
+      scroll-snap-align: center;
+      border: var(--outline);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 0;
+      background: var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      cursor: zoom-in;
+      text-align: left;
+      color: #fff;
+    }
+
+    .gallery span.cap { display: block; padding: 10px 14px 12px; font: 700 15px/1.3 var(--body); }
+
+    dialog {
+      border: 4px solid var(--yellow);
+      border-radius: 18px;
+      padding: 0;
+      background: var(--ink);
+      max-width: min(1280px, 96vw);
+    }
+
+    dialog::backdrop { background: rgba(10, 10, 10, 0.88); }
+
+    dialog img { width: 100%; height: auto; }
+
+    dialog button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 3px solid var(--ink);
+      background: var(--yellow);
+      font: 700 22px/1 var(--body);
+      cursor: pointer;
+    }
+
+    /* ---------------------------------------------------------------- цифры */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 34px; }
+
+    .stat { padding: 18px 18px 20px; text-align: center; }
+
+    .stat b { display: block; font: 54px/1 var(--head); color: var(--red); -webkit-text-stroke: 1.5px var(--ink); paint-order: stroke fill; }
+
+    .stat span { font-weight: 600; font-size: 15px; }
+
+    /* ---------------------------------------------------------------- финал */
+    .cta { text-align: center; }
+
+    .cta .icon {
+      width: 132px;
+      height: 132px;
+      border-radius: 30px;
+      border: 4px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      margin: 0 auto 26px;
+      transform: rotate(-5deg);
+    }
+
+    .cta .stores { justify-content: center; margin-top: 26px; }
+
+    .cta .note { margin-top: 26px; font-size: 14px; opacity: 0.9; }
+
+    @media (max-width: 900px) {
+      .hero .wrap, .story .wrap, .meltdown .wrap { grid-template-columns: minmax(0, 1fr); }
+      .shot-stack { margin: 16px 10px 20px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .meltdown figure { order: -1; }
+    }
+
+    @media (max-width: 520px) {
+      .logo { padding: 20px 30px 24px; }
+      .logo h1 { -webkit-text-stroke-width: 2px; }
+      .pow { font-size: 30px; left: -8px; }
+      .stat b { font-size: 42px; }
+      .bubble { font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="./"><span class="brand-mark">∞</span>Project <b>Infinity</b></a>
+      <nav class="nav">
+        <a class="hide-sm" href="#features"><span lang="ru">Об игре</span><span lang="en">Features</span></a>
+        <a class="hide-sm" href="#screens"><span lang="ru">Скриншоты</span><span lang="en">Screenshots</span></a>
+        <a class="hide-sm" href="#download"><span lang="ru">Скачать</span><span lang="en">Download</span></a>
+        <span class="lang" role="group" aria-label="Язык / Language">
+          <button type="button" data-set="ru">RU</button><button type="button" data-set="en">EN</button>
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================================================================ первый экран -->
+    <section class="hero rays">
+      <div class="wrap">
+        <div>
+          <div class="logo">
+            <h1>EMPLORAGE</h1>
+            <span class="sub"><span lang="ru">Офисная ярость</span><span lang="en">Office Rage</span></span>
+          </div>
+          <p class="tag">
+            <span lang="ru">Разнеси офис. Уволь всех.</span>
+            <span lang="en">Smash the office. Fire everyone.</span>
+          </p>
+          <p class="lead">
+            <span lang="ru">Достали дедлайны, созвоны и «срочно» в каждом письме? Копи ярость, срывайся и поднимайся по этажам офиса, увольняя коллег клавиатурами, фикусами и автоматом с едой.</span>
+            <span lang="en">Sick of deadlines, calls and "urgent" in every email? Build up your rage, snap and fight your way up the office tower, firing coworkers with keyboards, potted plants and a vending machine.</span>
+          </p>
+          <div class="stores" data-stores></div>
+          <p class="free">
+            <span lang="ru">Бесплатно на Android и iPhone · реклама только по желанию</span>
+            <span lang="en">Free on Android and iPhone · rewarded ads only when you choose</span>
+          </p>
+        </div>
+
+        <div class="shot-stack">
+          <figure class="back">
+            <img src="assets/emplorage/ru/03_boss.webp" data-src-ru="assets/emplorage/ru/03_boss.webp" data-src-en="assets/emplorage/en/03_boss.webp" width="1280" height="720" alt="Boss fight" loading="lazy">
+          </figure>
+          <figure class="front">
+            <img src="assets/emplorage/ru/02_meltdown.webp" data-src-ru="assets/emplorage/ru/02_meltdown.webp" data-src-en="assets/emplorage/en/02_meltdown.webp" width="1280" height="720" alt="Meltdown: coworkers flying" fetchpriority="high">
+          </figure>
+          <div class="pow"><span lang="ru">СРЫВ!</span><span lang="en">MELTDOWN!</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ история -->
+    <section class="story halftone">
+      <div class="wrap">
+        <div>
+          <span class="kicker"><span lang="ru">Знакомо?</span><span lang="en">Sound familiar?</span></span>
+          <h2 class="title"><span lang="ru">Это была последняя капля</span><span lang="en">That was the last straw</span></h2>
+          <p class="lead">
+            <span lang="ru">Ты — айтишник, у которого кончилось терпение. Бесконечные созвоны, синки по синкам и менеджеры, которым всё нужно ещё вчера. Сегодня ты больше не терпишь — и весь офис об этом узнает.</span>
+            <span lang="en">You're the IT guy who has run out of patience. Endless calls, syncs about syncs and managers who need everything yesterday. Today you snap — and the whole office is about to find out.</span>
+          </p>
+          <div class="counter">
+            <b>500 000 000</b>
+            <span><span lang="ru">созвонов в календаре</span><span lang="en">calls in your calendar</span></span>
+          </div>
+        </div>
+        <div class="bubbles" aria-hidden="true">
+          <div class="bubble"><small>PM</small><span lang="ru">Релиз… переносится…</span><span lang="en">The release… is delayed…</span></div>
+          <div class="bubble"><small>HR</small><span lang="ru">Зайди ко мне на минутку</span><span lang="en">Got a minute? My office.</span></div>
+          <div class="bubble"><small>PM</small><span lang="ru">Передай бэклог…</span><span lang="en">Pass the backlog…</span></div>
+          <div class="bubble"><small><span lang="ru">АНАЛИТИК</span><span lang="en">ANALYST</span></small><span lang="ru">Давай ещё один синк?</span><span lang="en">One more sync?</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ срыв -->
+    <section class="meltdown">
+      <div class="wrap">
+        <div>
+          <span class="kicker"><span lang="ru">Главная фишка</span><span lang="en">The main thing</span></span>
+          <h2 class="title stroke"><span lang="ru">Копи ярость. Срывайся.</span><span lang="en">Build rage. Snap.</span></h2>
+          <p class="lead">
+            <span lang="ru">Каждый удар и каждая реплика коллег заполняют полосу ярости. Когда она полная — начинается СРЫВ.</span>
+            <span lang="en">Every hit and every coworker's remark fills your rage bar. When it's full — MELTDOWN begins.</span>
+          </p>
+          <ul>
+            <li><span><span lang="ru">Удары вдвое сильнее, коллеги двигаются как в замедленной съёмке</span><span lang="en">Your hits deal double damage, coworkers move in slow motion</span></span></li>
+            <li><span><span lang="ru">Можно поднять даже диван и стол переговоров</span><span lang="en">You can lift even the sofa and the meeting table</span></span></li>
+            <li><span><span lang="ru">Комбо, разлетающиеся коллеги и «увольнение по статье»</span><span lang="en">Combos, flying coworkers and "fired for cause"</span></span></li>
+          </ul>
+          <div class="rage-bar" aria-hidden="true"><i></i></div>
+        </div>
+        <figure>
+          <img src="assets/emplorage/ru/01_action.webp" data-src-ru="assets/emplorage/ru/01_action.webp" data-src-en="assets/emplorage/en/01_action.webp" width="1280" height="720" alt="Fight with a chair" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================================================================ особенности -->
+    <section id="features" class="halftone">
+      <div class="wrap">
+        <span class="kicker"><span lang="ru">Что внутри</span><span lang="en">What's inside</span></span>
+        <h2 class="title"><span lang="ru">Каждый этаж — новый</span><span lang="en">Every floor is new</span></h2>
+        <div class="grid">
+          <article class="panel card">
+            <div class="badge">🏢</div>
+            <h3><span lang="ru">14 отделов</span><span lang="en">14 departments</span></h3>
+            <p><span lang="ru">У каждого свои привычки: аналитики размножаются, HR плюётся замечаниями, бухгалтерия кидается степлерами.</span><span lang="en">Each with its own habits: analysts multiply, HR spits reprimands, accounting throws staplers.</span></p>
+          </article>
+          <article class="panel card">
+            <div class="badge">🔥</div>
+            <h3><span lang="ru">Спецэтажи</span><span lang="en">Special floors</span></h3>
+            <p><span lang="ru">Серверная со взломом главного сервера, корпоратив с конкурсами и пожарная тревога.</span><span lang="en">A server room with a hacking minigame, an office party with contests and a fire drill.</span></p>
+          </article>
+          <article class="panel card">
+            <div class="badge">👔</div>
+            <h3><span lang="ru">Боссы</span><span lang="en">Bosses</span></h3>
+            <p><span lang="ru">Генеральный, финансовый и директор по персоналу — у каждого свои фазы и подлые приёмы.</span><span lang="en">The CEO, the CFO and the HR Director — each with their own phases and dirty tricks.</span></p>
+          </article>
+          <article class="panel card">
+            <div class="badge">🛗</div>
+            <h3><span lang="ru">Перки в лифте</span><span lang="en">Elevator perks</span></h3>
+            <p><span lang="ru">Между этажами выбирай улучшения — в каждом забеге своя сборка.</span><span lang="en">Pick upgrades between floors — a new build every run.</span></p>
+          </article>
+          <article class="panel card">
+            <div class="badge">📅</div>
+            <h3><span lang="ru">Ежедневный забег</span><span lang="en">Daily Run</span></h3>
+            <p><span lang="ru">Одинаковые этажи для всех, правило дня и общая таблица рекордов. Можно мериться с коллегами.</span><span lang="en">The same floors for everyone, a rule of the day and a shared leaderboard. Compete with your coworkers.</span></p>
+          </article>
+          <article class="panel card">
+            <div class="badge">🏆</div>
+            <h3><span lang="ru">Ачивки и образы</span><span lang="en">Achievements &amp; outfits</span></h3>
+            <p><span lang="ru">52 ачивки вроде «Анти-Agile» и 13 образов героя — от худи до «Золотого сотрудника».</span><span lang="en">52 achievements full of office humor and 13 outfits — from a hoodie to the Golden Employee.</span></p>
+          </article>
+        </div>
+
+        <div class="stats">
+          <div class="panel stat"><b>14</b><span lang="ru">отделов</span><span lang="en">departments</span></div>
+          <div class="panel stat"><b>3</b><span lang="ru">босса</span><span lang="en">bosses</span></div>
+          <div class="panel stat"><b>52</b><span lang="ru">ачивки</span><span lang="en">achievements</span></div>
+          <div class="panel stat"><b>∞</b><span lang="ru">этажей</span><span lang="en">floors</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ скриншоты -->
+    <section id="screens">
+      <div class="wrap">
+        <span class="kicker"><span lang="ru">Скриншоты</span><span lang="en">Screenshots</span></span>
+        <h2 class="title"><span lang="ru">Как это выглядит</span><span lang="en">See it in action</span></h2>
+        <div class="gallery" data-gallery></div>
+      </div>
+    </section>
+
+    <!-- ================================================================ скачать -->
+    <section id="download" class="cta rays">
+      <div class="wrap">
+        <img class="icon" src="assets/emplorage/icon.webp" width="512" height="512" alt="EmploRage icon" loading="lazy">
+        <h2 class="title stroke"><span lang="ru">Хватит терпеть</span><span lang="en">Stop putting up with it</span></h2>
+        <p class="lead" style="margin-inline:auto">
+          <span lang="ru">Скачай EmploRage бесплатно и устрой офису последний рабочий день.</span>
+          <span lang="en">Get EmploRage for free and give the office its last working day.</span>
+        </p>
+        <div class="stores" data-stores></div>
+        <p class="note">
+          <span lang="ru">Все персонажи вымышлены. Не повторяйте на работе.</span>
+          <span lang="en">All characters are fictional. Do not try this at work.</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div>
+        <h4>EmploRage</h4>
+        <ul>
+          <li><a href="emplorage_privacy.html"><span lang="ru">Политика конфиденциальности</span><span lang="en">Privacy Policy</span></a></li>
+          <li><a href="emplorage_privacy.html#delete-ru" lang="ru">Удаление аккаунта и данных</a><a href="emplorage_privacy.html#delete" lang="en">Account and data deletion</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span lang="ru">Поддержка</span><span lang="en">Support</span></h4>
+        <ul>
+          <li><a href="mailto:support@project-infinity.kz">support@project-infinity.kz</a></li>
+          <li><a href="./">Project Infinity</a></li>
+        </ul>
+      </div>
+      <p class="copy">© 2026 Project Infinity</p>
+    </div>
+  </footer>
+
+  <dialog id="zoom">
+    <button type="button" aria-label="Close" onclick="this.closest('dialog').close()">✕</button>
+    <img alt="">
+  </dialog>
+
+  <script>
+    // ссылки на сторы (App Store без /us/ — откроется магазин страны игрока)
+    var STORES = {
+      google: "https://play.google.com/store/apps/details?id=kz.pinfinity.emplorage",
+      apple: "https://apps.apple.com/app/id6823169235"
+    };
+
+    var ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffd21f" d="M4 2.5v19c0 .8.9 1.3 1.6.9l16-9.5c.7-.4.7-1.4 0-1.8l-16-9.5C4.9 1.2 4 1.7 4 2.5z"/></svg>';
+    var ICON_PHONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="1.5" width="14" height="21" rx="3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="18.5" r="1.3" fill="#fff"/></svg>';
+
+    function storeButtons() {
+      var g = '<a class="btn" href="' + STORES.google + '" target="_blank" rel="noopener">' + ICON_PLAY +
+        '<span><small><span lang="ru">Скачать в</span><span lang="en">Get it on</span></small><strong>Google Play</strong></span></a>';
+      var a = STORES.apple
+        ? '<a class="btn" href="' + STORES.apple + '" target="_blank" rel="noopener">' + ICON_PHONE +
+        '<span><small><span lang="ru">Загрузить в</span><span lang="en">Download on the</span></small><strong>App Store</strong></span></a>'
+        : '<span class="btn soon">' + ICON_PHONE +
+        '<span><small><span lang="ru">Скоро в</span><span lang="en">Coming soon to</span></small><strong>App Store</strong></span></span>';
+      return g + a;
+    }
+    document.querySelectorAll("[data-stores]").forEach(function (el) { el.innerHTML = storeButtons(); });
+
+    // галерея: картинки на языке страницы
+    var SHOTS = [
+      ["01_action", "Драка с креслом в руках", "Fighting with a chair"],
+      ["02_meltdown", "СРЫВ: разлетаются все", "MELTDOWN: everyone goes flying"],
+      ["03_boss", "Генеральный директор лично", "The CEO in person"],
+      ["04_server", "Серверная: взломай главный сервер", "Server room: hack the main server"],
+      ["05_party", "Корпоратив с конкурсами", "The office party contests"],
+      ["06_perks", "Перки в лифте", "Elevator perks"],
+      ["07_outfits", "Образы героя", "Hero outfits"],
+      ["08_menu", "Ежедневный забег и задания", "Daily run and tasks"]
+    ];
+    var gal = document.querySelector("[data-gallery]");
+    gal.innerHTML = SHOTS.map(function (s) {
+      return '<button type="button" data-shot="' + s[0] + '">' +
+        '<img src="assets/emplorage/ru/' + s[0] + '.webp" data-src-ru="assets/emplorage/ru/' + s[0] + '.webp" data-src-en="assets/emplorage/en/' + s[0] + '.webp" width="1280" height="720" loading="lazy" alt="">' +
+        '<span class="cap"><span lang="ru">' + s[1] + '</span><span lang="en">' + s[2] + '</span></span></button>';
+    }).join("");
+
+    var zoom = document.getElementById("zoom");
+    gal.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-shot]");
+      if (!b) return;
+      zoom.querySelector("img").src = "assets/emplorage/" + document.documentElement.lang + "/" + b.getAttribute("data-shot") + ".webp";
+      zoom.showModal();
+    });
+    zoom.addEventListener("click", function (e) { if (e.target === zoom) zoom.close(); });
+  </script>
+  <script src="assets/site.js"></script>
+</body>
+
+</html>
